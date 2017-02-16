@@ -3,6 +3,15 @@
 A small library allowing constructor dependency injection for applications using [Kodein](https://github.com/SalomonBrys/Kodein).
 
 ### Usage
+#### Maven
+```xml
+<dependency>
+    <groupId>pw.kmp</groupId>
+    <artifactId>kodeinject</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+#### Injected
 ```kotlin
 class Application(db: Database) {
     // stuff goes here
