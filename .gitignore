@@ -1,3 +1,10 @@
+# IntelliJ files
 .idea/
 *.iml
+
+# Maven output directory
 target/
+
+# OS stuff
+.DS_Store
+Thumbs.db
