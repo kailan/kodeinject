@@ -7,7 +7,36 @@
     <groupId>pw.kmp</groupId>
     <artifactId>kodeinject</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <name>kodeinject</name>
     <description>Constructor injection for Kodein.</description>
+    <url>https://github.com/kailan/kodeinject</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>kailanblanks</id>
+            <name>Kailan Blanks</name>
+            <email>kailan@kmp.pw</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>https://github.com/kailan/kodeinject</url>
+        <connection>scm:git:https://github.com/kailan/kodeinject.git</connection>
+        <developerConnection>scm:git:git@github.com:kailan/kodeinject.git</developerConnection>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/kailan/kodeinject/issues</url>
+    </issueManagement>
 
     <properties>
         <kotlin.version>1.0.6</kotlin.version>
