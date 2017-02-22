@@ -6,7 +6,7 @@
 
     <groupId>pw.kmp</groupId>
     <artifactId>kodeinject</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <name>kodeinject</name>
     <description>Constructor injection for Kodein.</description>

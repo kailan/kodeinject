@@ -6,9 +6,9 @@ import java.lang.reflect.Type
 /**
  * Provides a factory that performs dependency injection into constructors.
  */
-open class InjectionProvider<out T : Any>(override val createdType: Type) : Factory<Unit, T> {
+open class InjectionProvider<out T : Any>(createdType: Type, name: String = "injected") : AProvider<T>(name, createdType) {
 
-    override fun getInstance(kodein: FactoryKodein, key: Kodein.Key, arg: Unit): T {
+    override fun getInstance(kodein: ProviderKodein, key: Kodein.Key): T {
         if (createdType !is Class<*>) throw IllegalArgumentException("Kodein can only instantiate classes.")
         val clazz = createdType as Class<*>
         val constructor = clazz.constructors
@@ -18,26 +18,22 @@ open class InjectionProvider<out T : Any>(override val createdType: Type) : Fact
         return constructor.newInstance(*args.toTypedArray()) as T
     }
 
-    override val argType = Unit::class.java
-    override val factoryName = "injected"
-    override val description = "$factoryName<${createdType.typeName}>()"
-    override val fullDescription = "$factoryName<${createdType.typeName}>()"
+    override val description: String get() = "$factoryName<${createdType.simpleDispString}>()"
+    override val fullDescription: String get() = "$factoryName<${createdType.fullDispString}>()"
 
 }
 
 /**
  * An injection provider that only creates a single instance of the type.
  */
-class SingletonInjectionProvider<T : Any>(createdType: Type) : InjectionProvider<T>(createdType) {
+class SingletonInjectionProvider<T : Any>(createdType: Type) : InjectionProvider<T>(createdType, "injectedSingleton") {
 
     var instance: T? = null
 
-    override fun getInstance(kodein: FactoryKodein, key: Kodein.Key, arg: Unit): T {
+    override fun getInstance(kodein: ProviderKodein, key: Kodein.Key): T {
         if (instance != null) return instance!!
-        instance = super.getInstance(kodein, key, arg)
+        instance = super.getInstance(kodein, key)
         return instance!!
     }
-
-    override val factoryName = "injectedSingleton"
 
 }
