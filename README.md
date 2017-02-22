@@ -1,4 +1,4 @@
-# kodeinject
+# kodeinject [![Build Status](https://travis-ci.org/kailan/kodeinject.svg?branch=master)](https://travis-ci.org/kailan/kodeinject)
 
 A small library allowing constructor dependency injection for applications using [Kodein](https://github.com/SalomonBrys/Kodein).
 
