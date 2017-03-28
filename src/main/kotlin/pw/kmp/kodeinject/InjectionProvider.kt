@@ -6,7 +6,7 @@ import java.lang.reflect.Type
 /**
  * Provides a factory that performs dependency injection into constructors.
  */
-open class InjectionProvider<out T : Any>(createdType: Type, name: String = "injected") : AProvider<T>(name, createdType) {
+open class InjectionProvider<out T : Any>(override val createdType: Type, val name: String = "injected") : Provider<T> {
 
     override fun getInstance(kodein: ProviderKodein, key: Kodein.Key): T {
         if (createdType !is Class<*>) throw IllegalArgumentException("Kodein can only instantiate classes.")
@@ -18,8 +18,9 @@ open class InjectionProvider<out T : Any>(createdType: Type, name: String = "inj
         return constructor.newInstance(*args.toTypedArray()) as T
     }
 
-    override val description: String get() = "$factoryName<${createdType.simpleDispString}>()"
-    override val fullDescription: String get() = "$factoryName<${createdType.fullDispString}>()"
+    override fun factoryName() = name
+    override val description: String get() = "${factoryName()}<${createdType.simpleDispString}>()"
+    override val fullDescription: String get() = "${factoryName()}<${createdType.fullDispString}>()"
 
 }
 

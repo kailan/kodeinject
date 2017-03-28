@@ -6,7 +6,7 @@
 
     <groupId>pw.kmp</groupId>
     <artifactId>kodeinject</artifactId>
-    <version>1.0.1</version>
+    <version>1.1.0</version>
 
     <name>kodeinject</name>
     <description>Constructor injection for Kodein.</description>
@@ -72,7 +72,7 @@
         <dependency>
             <groupId>com.github.salomonbrys.kodein</groupId>
             <artifactId>kodein</artifactId>
-            <version>3.2.0</version>
+            <version>3.3.0</version>
         </dependency>
         <!-- Testing -->
         <dependency>
