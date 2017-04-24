@@ -10,18 +10,6 @@ import pw.kmp.kodeinject.injectedSingleton
 @Suppress("UNUSED_PARAMETER")
 class InjectionTest {
 
-    lateinit var app: Kodein
-    companion object {var initCount = 0}
-
-    @Before
-    fun setup() {
-        app = Kodein {
-            bind<Database>() with singleton { MyDatabase() }
-            bind() from injected<DatabaseClient>()
-            bind() from injectedSingleton<Application>()
-        }
-    }
-
     /**
      * Tests that dependencies are injected successfully into constructors.
      */
@@ -40,6 +28,20 @@ class InjectionTest {
         val app2: Application = app.instance()
         assert(app1 == app2)
         assert(initCount == 1)
+    }
+
+    // Mock Application
+
+    lateinit var app: Kodein
+    companion object {var initCount = 0}
+
+    @Before
+    fun setup() {
+        app = Kodein {
+            bind<Database>() with singleton { MyDatabase() }
+            bind() from injected<DatabaseClient>()
+            bind() from injectedSingleton<Application>()
+        }
     }
 
     interface Database
