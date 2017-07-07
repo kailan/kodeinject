@@ -23,7 +23,7 @@ open class InjectionProvider<T : Any>(val type: KClass<T>, final override val cr
     }
 
     internal fun findConstructor(kodein: NoArgBindingKodein): KFunction<T>? {
-        return type.constructors.filter { it.parameters.all { p -> kodein.ProviderOrNull(TT(p.type.javaType as Class<*>)) != null } }.firstOrNull()
+        return type.constructors.filter { it.parameters.all { p -> p.type.javaType is Class<*> && kodein.ProviderOrNull(TT(p.type.javaType as Class<*>)) != null } }.firstOrNull()
     }
 
     internal fun provideDependencies(constructor: KFunction<T>, kodein: NoArgBindingKodein): Array<Any?> {
