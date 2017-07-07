@@ -8,9 +8,9 @@ import com.github.salomonbrys.kodein.generic
 /**
  * Creates an injection provider: each time an instance is needed, the type will be instantiated.
  */
-inline fun <reified T : Any> Kodein.Builder.injected() = InjectionProvider<T>(generic())
+inline fun <reified T : Any> Kodein.Builder.injected() = InjectionProvider(T::class, generic())
 
 /**
  * Creates an injection provider: the type will only be instantiated the first time it is needed.
  */
-inline fun <reified T : Any> Kodein.Builder.injectedSingleton() = SingletonInjectionProvider<T>(generic())
+inline fun <reified T : Any> Kodein.Builder.injectedSingleton() = SingletonInjectionProvider(T::class, generic())

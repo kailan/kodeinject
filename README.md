@@ -8,7 +8,7 @@ A small library allowing constructor dependency injection for applications using
 <dependency>
     <groupId>pw.kmp</groupId>
     <artifactId>kodeinject</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
 </dependency>
 ```
 #### Injected
