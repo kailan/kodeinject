@@ -34,6 +34,7 @@ class InjectedConstructor<out T : Any>(val constructor: KFunction<T>, val kodein
      * Fetches a parameter from the Kodein container.
      */
     internal fun <T : Any> provideParameter(type: Class<T>): T? {
+        if (type == Kodein::class.java) return kodein as T
         return kodein.ProviderOrNull(TT(type))?.invoke()
     }
 
@@ -54,6 +55,7 @@ class InjectedConstructor<out T : Any>(val constructor: KFunction<T>, val kodein
         internal fun canProvide(param: KParameter, kodein: Kodein): Boolean {
             return param.type.javaType is Class<*> &&
                     (kodein.ProviderOrNull(TT(param.type.javaType as Class<*>)) != null ||
+                    param.type.javaType == Kodein::class.java ||
                     param.findAnnotation<OrNull>() != null)
         }
 

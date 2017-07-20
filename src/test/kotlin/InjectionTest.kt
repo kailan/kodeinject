@@ -44,6 +44,18 @@ class InjectionTest {
         }
     }
 
+    /**
+     * Tests that an instance of Kodein is injected automatically.
+     */
+    @Test
+    fun kodeinDependency() {
+        try {
+            app.instance<ApplicationDependingOnKodein>()
+        } catch (ex: Throwable) {
+            throw AssertionError("An instance of Kodein was not injected.", ex)
+        }
+    }
+
     // Mock Application
 
     lateinit var app: Kodein
@@ -56,6 +68,7 @@ class InjectionTest {
             bind() from injected<DatabaseClient>()
             bind() from injectedSingleton<Application>()
             bind() from injectedSingleton<ApplicationWithNullParameter>()
+            bind() from injectedSingleton<ApplicationDependingOnKodein>()
         }
     }
 
@@ -69,5 +82,6 @@ class InjectionTest {
         }
     }
     class ApplicationWithNullParameter(client: DatabaseClient, @OrNull val date: Date?)
+    class ApplicationDependingOnKodein(kodein: Kodein)
 
 }
