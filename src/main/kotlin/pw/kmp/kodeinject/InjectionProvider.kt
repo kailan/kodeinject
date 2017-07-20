@@ -16,18 +16,8 @@ import kotlin.reflect.jvm.javaType
 open class InjectionProvider<T : Any>(val type: KClass<T>, final override val createdType: TypeToken<T>) : NoArgBinding<T> {
 
     override fun getInstance(kodein: NoArgBindingKodein, key: Kodein.Key<Unit, T>): T {
-        val constructor = findConstructor(kodein)
-            ?: throw IllegalArgumentException("No constructors of ${type.simpleName} match available bindings.\nRegistered in Kodein:\n" + kodein.container.bindings.description)
-        val parameters = provideDependencies(constructor, kodein)
-        return constructor.call(*parameters)
-    }
-
-    internal fun findConstructor(kodein: NoArgBindingKodein): KFunction<T>? {
-        return type.constructors.filter { it.parameters.all { p -> p.type.javaType is Class<*> && kodein.ProviderOrNull(TT(p.type.javaType as Class<*>)) != null } }.firstOrNull()
-    }
-
-    internal fun provideDependencies(constructor: KFunction<T>, kodein: NoArgBindingKodein): Array<Any?> {
-        return constructor.parameters.map { kodein.Provider(TT(it.type.javaType as Class<*>)).invoke() }.toTypedArray()
+        val constructor = InjectedConstructor.create(type, kodein)
+        return constructor.inject()
     }
 
     override fun factoryName() = "injected"
