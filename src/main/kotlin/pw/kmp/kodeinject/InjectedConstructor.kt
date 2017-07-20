@@ -20,14 +20,14 @@ class InjectedConstructor<out T : Any>(val constructor: KFunction<T>, val kodein
      * Instantiates the class and injects parameters into the constructor.
      */
     fun inject(): T {
-        return constructor.call(*provideParameters())
+        return constructor.callBy(provideParameters())
     }
 
     /**
      * Creates an array of parameters to pass to the constructor.
      */
-    internal fun provideParameters(): Array<Any?> {
-        return constructor.parameters.map { provideParameter(it.type.javaType as Class<*>) }.toTypedArray()
+    internal fun provideParameters(): Map<KParameter, Any?> {
+        return constructor.parameters.map { it.to(provideParameter(it.type.javaType as Class<*>)) }.toMap()
     }
 
     /**
