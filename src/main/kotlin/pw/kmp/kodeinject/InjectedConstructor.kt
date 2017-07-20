@@ -3,9 +3,12 @@ package pw.kmp.kodeinject
 import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.TT
 import com.github.salomonbrys.kodein.description
+import org.jetbrains.annotations.Nullable
+import pw.kmp.kodeinject.annotations.OrNull
 import kotlin.reflect.KClass
 import kotlin.reflect.KFunction
 import kotlin.reflect.KParameter
+import kotlin.reflect.full.findAnnotation
 import kotlin.reflect.jvm.javaType
 
 /**
@@ -49,7 +52,9 @@ class InjectedConstructor<out T : Any>(val constructor: KFunction<T>, val kodein
          * Returns whether the Kodein instance can provide a given type.
          */
         internal fun canProvide(param: KParameter, kodein: Kodein): Boolean {
-            return param.type.javaType is Class<*> && kodein.ProviderOrNull(TT(param.type.javaType as Class<*>)) != null
+            return param.type.javaType is Class<*> &&
+                    (kodein.ProviderOrNull(TT(param.type.javaType as Class<*>)) != null ||
+                    param.findAnnotation<OrNull>() != null)
         }
 
     }

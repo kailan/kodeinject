@@ -4,8 +4,10 @@ import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.singleton
 import org.junit.Before
 import org.junit.Test
+import pw.kmp.kodeinject.annotations.OrNull
 import pw.kmp.kodeinject.injected
 import pw.kmp.kodeinject.injectedSingleton
+import java.util.*
 
 @Suppress("UNUSED_PARAMETER")
 class InjectionTest {
@@ -30,6 +32,18 @@ class InjectionTest {
         assert(initCount == 1)
     }
 
+    /**
+     * Tests that injection with missing dependencies works.
+     */
+    @Test
+    fun nullableDependency() {
+        try {
+            assert(app.instance<ApplicationWithNullParameter>().date == null)
+        } catch (ex: Throwable) {
+            throw AssertionError("Injection with missing dependency failed.")
+        }
+    }
+
     // Mock Application
 
     lateinit var app: Kodein
@@ -41,6 +55,7 @@ class InjectionTest {
             bind<Database>() with singleton { MyDatabase() }
             bind() from injected<DatabaseClient>()
             bind() from injectedSingleton<Application>()
+            bind() from injectedSingleton<ApplicationWithNullParameter>()
         }
     }
 
@@ -53,5 +68,6 @@ class InjectionTest {
             initCount++
         }
     }
+    class ApplicationWithNullParameter(client: DatabaseClient, @OrNull val date: Date?)
 
 }
