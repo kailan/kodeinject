@@ -8,7 +8,7 @@ A small library allowing constructor dependency injection for applications using
 <dependency>
     <groupId>pw.kmp</groupId>
     <artifactId>kodeinject</artifactId>
-    <version>1.2.0</version>
+    <version>1.2.1</version>
 </dependency>
 ```
 #### Injected
@@ -33,3 +33,20 @@ val kodein = Kodein {
 ```
 Use `injectedSingleton()` to cache the dependency instead of creating a new
 instance for each access.
+
+#### Nullable
+```kotlin
+class Application(db: Database, @OrNull cache: Cache?) {
+    // stuff goes here
+}
+```
+Paramaters that aren't required can be annotated with `@OrNull`, and will be set to null if they are unavailable upon
+injection.
+
+#### Automatic Kodein injection
+```kotlin
+class Application(kodein: Kodein) {
+    // stuff goes here
+}
+```
+Constructors requiring the `Kodein` object will be injected with it by default, without the need to create a binding.
