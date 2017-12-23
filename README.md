@@ -8,7 +8,7 @@ A small library allowing constructor dependency injection for applications using
 <dependency>
     <groupId>pw.kmp</groupId>
     <artifactId>kodeinject</artifactId>
-    <version>1.2.1</version>
+    <version>1.2.2</version>
 </dependency>
 ```
 #### Injected
@@ -36,11 +36,11 @@ instance for each access.
 
 #### Nullable
 ```kotlin
-class Application(db: Database, @OrNull cache: Cache?) {
+class Application(db: Database, cache: Cache?) {
     // stuff goes here
 }
 ```
-Paramaters that aren't required can be annotated with `@OrNull`, and will be set to null if they are unavailable upon
+Paramaters that are nullable will be set to null if they are unavailable upon
 injection.
 
 #### Automatic Kodein injection

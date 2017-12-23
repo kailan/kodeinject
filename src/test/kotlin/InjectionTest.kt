@@ -4,7 +4,6 @@ import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.singleton
 import org.junit.Before
 import org.junit.Test
-import pw.kmp.kodeinject.annotations.OrNull
 import pw.kmp.kodeinject.injected
 import pw.kmp.kodeinject.injectedSingleton
 import java.util.*
@@ -81,7 +80,7 @@ class InjectionTest {
             initCount++
         }
     }
-    class ApplicationWithNullParameter(client: DatabaseClient, @OrNull val date: Date?)
+    class ApplicationWithNullParameter(client: DatabaseClient, val date: Date?)
     class ApplicationDependingOnKodein(kodein: Kodein)
 
 }
