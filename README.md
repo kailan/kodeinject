@@ -3,7 +3,8 @@
 A small library allowing constructor dependency injection for applications using [Kodein](https://github.com/SalomonBrys/Kodein).
 
 ### Usage
-#### Maven
+#### Add dependency
+##### Maven
 ```xml
 <dependency>
     <groupId>pw.kmp</groupId>
@@ -11,6 +12,11 @@ A small library allowing constructor dependency injection for applications using
     <version>1.2.2</version>
 </dependency>
 ```
+##### Gradle
+```gradle
+compile "pw.kmp:kodeinject:1.2.2"
+```
+
 #### Injected
 ```kotlin
 class Application(db: Database) {
