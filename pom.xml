@@ -50,7 +50,7 @@
     </distributionManagement>
 
     <properties>
-        <kotlin.version>1.2.10</kotlin.version>
+        <kotlin.version>1.6.0</kotlin.version>
         <kodein.version>4.1.0</kodein.version>
     </properties>
 
